@@ -12,7 +12,7 @@ class TimeController {
     var formatter = DateFormatter()
     
     init() {
-        formatter.timeStyle = DateFormatter.Style.long
+        formatter.timeStyle = DateFormatter.Style.short
     }
     
     func getCurrentTime() -> String {
