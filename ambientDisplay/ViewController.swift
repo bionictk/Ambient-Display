@@ -17,10 +17,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     
-    @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var currentWeatherIcon: UIImageView!
     
     var timeController: TimeController = TimeController()
+    var weatherController: WeatherController = WeatherController()
     var timeLabelTimer: Timer?
     
     override func viewDidLoad() {
@@ -50,54 +51,10 @@ class ViewController: UIViewController {
     }
     
     @objc func updateCurrentWeather() {
-        let session = URLSession.shared
-
-        let weatherURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?id=4180439&appid=29536689fa5bbed8e7e72f7d8dfc106c&units=metric")!
-
-        let dataTask = session.dataTask(with: weatherURL) {
-            (data: Data?, response: URLResponse?, error: Error?) in
-
-            if error != nil {
-                NotificationCenter.default.post(name: .errorChannel, object: "Weather: No response from server.")
-            } else {
-                if let data = data {
-                    let dataString = String(data: data, encoding: String.Encoding.utf8)
-                    print("Current weather data:\n\(dataString!)")
-
-                    if let dictionary = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
-                    
-                        if let tempMain = dictionary!["main"] as? [String: Any]{
-                            
-                            let temperature = tempMain["temp"] as! Float
-                            
-                            DispatchQueue.main.async {
-                                self.weatherLabel.text = "Current: \(temperature)°C"
-                            }
-                        }
-                        
-                        if let weatherArray = dictionary!["weather"] as? [Any] {
-                            if weatherArray.count != 1 {
-                                NotificationCenter.default.post(name: .errorChannel, object: "\(weatherArray.count) weather info!")
-                            }
-                            
-                            let currentWeather = weatherArray[0] as? [String: Any]
-                            
-                            let url = URL(string: "https://openweathermap.org/img/w/" + (currentWeather!["icon"] as! String) + ".png")
-                            let data = try? Data(contentsOf: url!)
-                            self.currentWeatherIcon.image = UIImage(data: data!)
-                        }
-                        
-                        
-                    } else {
-                        NotificationCenter.default.post(name: .errorChannel, object: "Weather: JSON parsing failed")
-                    }
-                } else {
-                    NotificationCenter.default.post(name: .errorChannel, object: "Weather: No data received.")
-                }
-            }
-        }
-        
-        dataTask.resume()
+        weatherController.getCurrentWeather(finished: { temp, icon in
+            self.currentTempLabel.text = "Outside: \(temp)°C"
+            self.currentWeatherIcon.image = icon
+        })
     }
 }
 

@@ -14,7 +14,7 @@
 		746CAE352016781700C39C06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746CAE332016781700C39C06 /* LaunchScreen.storyboard */; };
 		746CAE402016781700C39C06 /* test1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE3F2016781700C39C06 /* test1Tests.swift */; };
 		746CAE4B20179F0200C39C06 /* TimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE4A20179F0200C39C06 /* TimeController.swift */; };
-		746CAE4D2017E5CD00C39C06 /* CurrentWeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE4C2017E5CD00C39C06 /* CurrentWeatherController.swift */; };
+		746CAE4D2017E5CD00C39C06 /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE4C2017E5CD00C39C06 /* WeatherController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,7 @@
 		746CAE3F2016781700C39C06 /* test1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test1Tests.swift; sourceTree = "<group>"; };
 		746CAE412016781700C39C06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		746CAE4A20179F0200C39C06 /* TimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeController.swift; sourceTree = "<group>"; };
-		746CAE4C2017E5CD00C39C06 /* CurrentWeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherController.swift; sourceTree = "<group>"; };
+		746CAE4C2017E5CD00C39C06 /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +88,7 @@
 				746CAE332016781700C39C06 /* LaunchScreen.storyboard */,
 				746CAE362016781700C39C06 /* Info.plist */,
 				746CAE4A20179F0200C39C06 /* TimeController.swift */,
-				746CAE4C2017E5CD00C39C06 /* CurrentWeatherController.swift */,
+				746CAE4C2017E5CD00C39C06 /* WeatherController.swift */,
 			);
 			path = ambientDisplay;
 			sourceTree = "<group>";
@@ -205,7 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				746CAE4D2017E5CD00C39C06 /* CurrentWeatherController.swift in Sources */,
+				746CAE4D2017E5CD00C39C06 /* WeatherController.swift in Sources */,
 				746CAE2D2016781700C39C06 /* ViewController.swift in Sources */,
 				746CAE2B2016781700C39C06 /* AppDelegate.swift in Sources */,
 				746CAE4B20179F0200C39C06 /* TimeController.swift in Sources */,
