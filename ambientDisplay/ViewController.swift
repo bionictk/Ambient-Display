@@ -31,6 +31,11 @@ class ViewController: UIViewController {
         // Usage: NotificationCenter.default.post(name: .errorChannel, object: "Error message.")
         NotificationCenter.default.addObserver(self, selector: #selector(setErrorMessage(notification:)), name: .errorChannel, object: nil)
         
+        // Clear errors on tap
+        let errorTap = UITapGestureRecognizer(target: self, action: #selector(clearErrorMessage))
+        errorLabel.isUserInteractionEnabled = true
+        errorLabel.addGestureRecognizer(errorTap)
+        
         // Timer loop for clock
         timeLabelTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true)
         
@@ -45,7 +50,11 @@ class ViewController: UIViewController {
     @objc func setErrorMessage(notification: NSNotification) {
         errorLabel.text = (notification.object as! String)
     }
-    
+
+    @objc func clearErrorMessage() {
+        errorLabel.text = ""
+    }
+
     @objc func updateTimeLabel() {
         timeLabel.text = timeController.getCurrentTime()
     }
