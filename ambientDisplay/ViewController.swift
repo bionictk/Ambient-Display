@@ -58,7 +58,7 @@ class ViewController: UIViewController {
             (data: Data?, response: URLResponse?, error: Error?) in
 
             if error != nil {
-                NotificationCenter.default.post(name: .errorChannel, object: "Weather: No response.")
+                NotificationCenter.default.post(name: .errorChannel, object: "Weather: No response from server.")
             } else {
                 if let data = data {
                     let dataString = String(data: data, encoding: String.Encoding.utf8)
