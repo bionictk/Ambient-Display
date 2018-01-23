@@ -35,7 +35,10 @@ class ViewController: UIViewController {
         
         // Timer loop for current weather
         timeLabelTimer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(updateCurrentWeather), userInfo: nil, repeats: true)
-        
+     
+        // Init views
+        updateTimeLabel()
+        updateCurrentWeather()
     }
 
     @objc func setErrorMessage(notification: NSNotification) {
