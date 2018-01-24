@@ -25,7 +25,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var timeController: TimeController = TimeController()
     var weatherController: WeatherController = WeatherController()
-    var timeLabelTimer: Timer?
+    var calendarController: CalendarController = CalendarController()
+    
+    var clockUpdateTimer: Timer?
+    var weatherUpdateTimer: Timer?
+    var calendarUpdateTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +44,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         errorLabel.addGestureRecognizer(errorTap)
         
         // Timer loop for clock
-        timeLabelTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true)
+        clockUpdateTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true)
         
         // Timer loop for current weather
-        timeLabelTimer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(updateCurrentWeather), userInfo: nil, repeats: true)
+        weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 935, target: self, selector: #selector(updateCurrentWeather), userInfo: nil, repeats: true)
+        
+        // Timer loop for calendar events
+        calendarUpdateTimer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(updateCalendarEvents), userInfo: nil, repeats: true)
      
         // Init views
         updateTimeLabel()
@@ -71,45 +78,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc func updateCalendarEvents() {
-        
-        var titles : [String] = []
-//        var startDates : [NSDate] = []
-//        var endDates : [NSDate] = []
-//
-//        let eventStore = EKEventStore()
-//        let calendars = eventStore.calendars(for: .event)
-//
-//        for calendar in calendars {
-//            if calendar.title == "Work" {
-//
-//                let oneMonthAgo = NSDate(timeIntervalSinceNow: -30*24*3600)
-//                let oneMonthAfter = NSDate(timeIntervalSinceNow: +30*24*3600)
-//
-//                let predicate = eventStore.predicateForEvents(withStart: oneMonthAgo as Date, end: oneMonthAfter as Date, calendars: [calendar])
-//
-//                let events = eventStore.events(matching: predicate)
-//
-//                for event in events {
-//                    titles.append(event.title)
-//                    startDates.append(event.startDate! as NSDate)
-//                    endDates.append(event.endDate! as NSDate)
-//                }
-//            }
-//        }
-        titles = ["Item1", "Item 2", "Item number 3!!"]
+        calendarController.updateCalendarEvents()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return calendarController.getTableSize()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let titles = ["Item1", "Item 2", "Item number 3!!"]
         let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarCell")!
         
-        cell.textLabel?.text = titles[indexPath.row]
-        cell.detailTextLabel?.text = "details!!"
+        cell.textLabel?.text = calendarController.getTitle(index: indexPath.row)
+//        cell.detailTextLabel?.text = "details!!"
         cell.textLabel?.textColor = .white
         return cell
     }
