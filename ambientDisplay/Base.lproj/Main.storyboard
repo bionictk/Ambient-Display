@@ -75,7 +75,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="8Qe-RC-dtc"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b39-uT-Nnz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading Cal..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b39-uT-Nnz">
                                 <rect key="frame" x="20" y="236" width="245" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
@@ -88,6 +88,7 @@
                     </view>
                     <connections>
                         <outlet property="calendarTableView" destination="mwb-R9-8ll" id="UbZ-Hm-WlE"/>
+                        <outlet property="calendarTopLabel" destination="b39-uT-Nnz" id="xUq-KQ-yc8"/>
                         <outlet property="currentTempLabel" destination="Vfz-Sr-sKP" id="Wsx-zn-fcX"/>
                         <outlet property="currentWeatherIcon" destination="gQA-8U-sHj" id="hWr-vK-pqt"/>
                         <outlet property="errorLabel" destination="txJ-to-Rc2" id="W51-T3-Oh0"/>

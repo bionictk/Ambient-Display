@@ -21,6 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var currentWeatherIcon: UIImageView!
     
+    @IBOutlet weak var calendarTopLabel: UILabel!
     @IBOutlet weak var calendarTableView: UITableView!
     
     var timeController: TimeController = TimeController()
@@ -79,6 +80,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @objc func updateCalendarEvents() {
         calendarController.updateCalendarEvents()
+        if calendarController.areEventsFromToday() {
+            calendarTopLabel.text = "Today"
+        } else {
+            calendarTopLabel.text = "Tomorrow"
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

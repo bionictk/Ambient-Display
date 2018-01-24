@@ -9,7 +9,8 @@
 import EventKit
 
 class CalendarController {
-    var listOfCandidateCalendars: [String] = ["Home", "Classes", "Family"]
+    let listOfCandidateCalendars: [String] = ["Home", "Classes", "Family"]
+    let changeDateThreshold: Date = Calendar.current.date(bySettingHour: 21, minute: 0, second: 0, of: Date())!
     
     var eventList: [String] = []
     
@@ -27,11 +28,16 @@ class CalendarController {
         
         for calendar in calendars {
             if listOfCandidateCalendars.contains(calendar.title) {
+                let today = Date()
+                let cal = Calendar.current
+                let midnightToday = cal.startOfDay(for: today)
+                let midnightTomorrow = midnightToday.addingTimeInterval(24*3600)
+                let midnightDayAfterTomorrow = midnightTomorrow.addingTimeInterval(24*3600)
                 
-                let oneDayAgo = NSDate(timeIntervalSinceNow: -1*24*3600)
-                let oneDayAfter = NSDate(timeIntervalSinceNow: +1*24*3600)
-                
-                let predicate = eventStore.predicateForEvents(withStart: oneDayAgo as Date, end: oneDayAfter as Date, calendars: [calendar])
+                var predicate = eventStore.predicateForEvents(withStart: midnightToday, end: midnightTomorrow, calendars: [calendar])
+                if !areEventsFromToday() {
+                    predicate = eventStore.predicateForEvents(withStart: midnightTomorrow, end: midnightDayAfterTomorrow, calendars: [calendar])
+                }
                 
                 let events = eventStore.events(matching: predicate)
                 
@@ -46,5 +52,9 @@ class CalendarController {
         }
         
         eventList.sort()
+    }
+    
+    func areEventsFromToday() -> Bool {
+        return Date() <= changeDateThreshold
     }
 }
