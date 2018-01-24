@@ -113,5 +113,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel?.textColor = .white
         return cell
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Request access to calendar
+        let eventStore = EKEventStore()
+        eventStore.requestAccess(to: EKEntityType.event, completion: {
+            (accessGranted: Bool, error: Error?) in
+        })
+    }
+    
 }
 
