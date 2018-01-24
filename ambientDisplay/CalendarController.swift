@@ -9,6 +9,8 @@
 import EventKit
 
 class CalendarController {
+    var listOfCandidateCalendars: [String] = ["Home", "Classes", "Family"]
+    
     var eventList: [String] = []
     
     func getTableSize() -> Int {
@@ -20,30 +22,29 @@ class CalendarController {
     }
     
     func updateCalendarEvents() {
-        var startDates : [NSDate] = []
-        var endDates : [NSDate] = []
-        
         let eventStore = EKEventStore()
         let calendars = eventStore.calendars(for: .event)
         
         for calendar in calendars {
-            if calendar.title == "Home" {
+            if listOfCandidateCalendars.contains(calendar.title) {
                 
                 let oneDayAgo = NSDate(timeIntervalSinceNow: -1*24*3600)
-                let oneMonthAfter = NSDate(timeIntervalSinceNow: +30*24*3600)
+                let oneDayAfter = NSDate(timeIntervalSinceNow: +1*24*3600)
                 
-                let predicate = eventStore.predicateForEvents(withStart: oneDayAgo as Date, end: oneMonthAfter as Date, calendars: [calendar])
+                let predicate = eventStore.predicateForEvents(withStart: oneDayAgo as Date, end: oneDayAfter as Date, calendars: [calendar])
                 
                 let events = eventStore.events(matching: predicate)
                 
                 for event in events {
-                    eventList.append(event.title)
-                    startDates.append(event.startDate! as NSDate)
-                    endDates.append(event.endDate! as NSDate)
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "HH:mm"
+                    let formattedString = formatter.string(from: event.startDate)
+                    eventList.append(formattedString + "\t  " + event.title)
+
                 }
             }
         }
         
-        dump(eventList)
+        eventList.sort()
     }
 }

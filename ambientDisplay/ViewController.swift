@@ -59,7 +59,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     @objc func setErrorMessage(notification: NSNotification) {
-        errorLabel.text = (notification.object as! String)
+        errorLabel.text = errorLabel.text! + "/" + (notification.object as! String)
     }
 
     @objc func clearErrorMessage() {
@@ -91,6 +91,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel?.text = calendarController.getTitle(index: indexPath.row)
 //        cell.detailTextLabel?.text = "details!!"
         cell.textLabel?.textColor = .white
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
         return cell
     }
     
