@@ -23,19 +23,22 @@ class CalendarController {
     }
     
     func updateCalendarEvents() {
+        eventList.removeAll()
         let eventStore = EKEventStore()
         let calendars = eventStore.calendars(for: .event)
         
+        let today = Date()
+        let cal = Calendar.current
+        let midnightToday = cal.startOfDay(for: today)
+        let midnightTomorrow = midnightToday.addingTimeInterval(24*3600)
+        let midnightDayAfterTomorrow = midnightTomorrow.addingTimeInterval(24*3600)
+        
         for calendar in calendars {
             if listOfCandidateCalendars.contains(calendar.title) {
-                let today = Date()
-                let cal = Calendar.current
-                let midnightToday = cal.startOfDay(for: today)
-                let midnightTomorrow = midnightToday.addingTimeInterval(24*3600)
-                let midnightDayAfterTomorrow = midnightTomorrow.addingTimeInterval(24*3600)
-                
-                var predicate = eventStore.predicateForEvents(withStart: midnightToday, end: midnightTomorrow, calendars: [calendar])
-                if !areEventsFromToday() {
+                var predicate: NSPredicate
+                if areEventsFromToday() {
+                    predicate = eventStore.predicateForEvents(withStart: midnightToday, end: midnightTomorrow, calendars: [calendar])
+                } else {
                     predicate = eventStore.predicateForEvents(withStart: midnightTomorrow, end: midnightDayAfterTomorrow, calendars: [calendar])
                 }
                 
@@ -46,7 +49,6 @@ class CalendarController {
                     formatter.dateFormat = "HH:mm"
                     let formattedString = formatter.string(from: event.startDate)
                     eventList.append(formattedString + "\t  " + event.title)
-
                 }
             }
         }
