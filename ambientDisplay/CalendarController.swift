@@ -10,7 +10,6 @@ import EventKit
 
 class CalendarController {
     let listOfCandidateCalendars: [String] = ["Home", "Classes", "Family"]
-    let changeDateThreshold: Date = Calendar.current.date(bySettingHour: 21, minute: 0, second: 0, of: Date())!
     
     var eventList: [String] = []
     
@@ -57,6 +56,7 @@ class CalendarController {
     }
     
     func areEventsFromToday() -> Bool {
+        let changeDateThreshold = Calendar.current.date(bySettingHour: 21, minute: 0, second: 0, of: Date())!
         return Date() <= changeDateThreshold
     }
 }
