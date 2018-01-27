@@ -85,6 +85,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             calendarTopLabel.text = "Tomorrow"
         }
+        calendarTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
