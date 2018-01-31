@@ -40,14 +40,21 @@ class WeatherController {
                             
                         }
                         
-                        if let weatherArray = dictionary!["weather"] as? [Any] {
-                            if weatherArray.count != 1 {
-                                NotificationCenter.default.post(name: .errorChannel, object: "\(weatherArray.count) weather info!")
+                        if let weatherArray = dictionary!["weather"] as? [[String: Any]] {
+                            var weatherIconArray: [String] = []
+                            for weatherElement in weatherArray {
+                                let weatherIcon = weatherElement["icon"] as! String
+                                if !weatherIconArray.contains(weatherIcon) {
+                                    weatherIconArray.append(weatherIcon)
+                                }
                             }
                             
-                            let currentWeather = weatherArray[0] as? [String: Any]
+                            if weatherIconArray.count != 1 {
+                                NotificationCenter.default.post(name: .errorChannel, object: "\(weatherArray.count) icons!")
+                            }
                             
-                            let url = URL(string: "https://openweathermap.org/img/w/" + (currentWeather!["icon"] as! String) + ".png")
+                            let currentWeatherIcon = weatherIconArray[0]
+                            let url = URL(string: "https://openweathermap.org/img/w/" + currentWeatherIcon + ".png")
                             let data = try? Data(contentsOf: url!)
                             icon = UIImage(data: data!)!
                         }
