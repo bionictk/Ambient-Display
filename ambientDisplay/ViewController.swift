@@ -73,7 +73,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @objc func updateCurrentWeather() {
         weatherController.getCurrentWeather(finished: { temp, icon in
-            self.currentTempLabel.text = "Outside: \(temp)°C"
+            self.currentTempLabel.text = "Now: \(temp) °C"
             self.currentWeatherIcon.image = icon
         })
     }
