@@ -9,7 +9,7 @@
 import EventKit
 
 class CalendarController {
-    let listOfCandidateCalendars: [String] = ["Home", "Classes", "Family"]
+    let listOfCandidateCalendars: [String] = ["Home", "Classes"]
     
     var eventList: [String] = []
     
