@@ -10,7 +10,8 @@ import UIKit
 
 class WeatherController {
     
-    var currentWeatherURL: String = "https://api.openweathermap.org/data/2.5/weather?id=4180439&appid=29536689fa5bbed8e7e72f7d8dfc106c&units=metric"
+    let currentWeatherURL: String = "https://api.openweathermap.org/data/2.5/weather?id=4180439&appid=29536689fa5bbed8e7e72f7d8dfc106c&units=metric"    // Atlanta
+//    let currentWeatherURL: String = "https://api.openweathermap.org/data/2.5/weather?id=5391997&appid=29536689fa5bbed8e7e72f7d8dfc106c&units=metric"    // San Francisco
     
     func getCurrentWeather(finished: @escaping ((_ temp: Int, _ icon: UIImage)->Void)) {
         
