@@ -27,8 +27,8 @@ class WeatherController {
                 NotificationCenter.default.post(name: .errorChannel, object: "Weather: No response from server.")
             } else {
                 if let data = data {
-                    let dataString = String(data: data, encoding: String.Encoding.utf8)
-                    print("Current weather data:\n\(dataString!)")
+//                    let dataString = String(data: data, encoding: String.Encoding.utf8)
+//                    print("Current weather data:\n\(dataString!)")
                     
                     if let dictionary = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
                         
