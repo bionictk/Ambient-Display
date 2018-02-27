@@ -46,12 +46,6 @@ class ReminderController {
                     group.leave()
                 })
             }
-            
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "HH:mm"
-//            let formattedString = formatter.string(from: event.startDate)
-//            eventList.append(formattedString + "\t  " + event.title)
-            
         }
         
     }
