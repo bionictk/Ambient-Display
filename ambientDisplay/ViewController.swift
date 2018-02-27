@@ -170,7 +170,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == calendarTableView {
         } else {
-            if (indexPath.row == 0 ) {reminderController.undoItem()}
             reminderController.setComplete(index: indexPath.row)
             updateReminderEvents()
         }
