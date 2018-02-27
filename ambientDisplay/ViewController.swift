@@ -96,22 +96,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc func updateCalendarEvents() {
-        calendarController.updateCalendarEvents()
-        if calendarController.areEventsFromToday() {
+        let group = DispatchGroup()
+        group.enter()
+        calendarController.updateCalendarEvents(group: group)
+        group.notify(queue: .global()) {
             DispatchQueue.main.async {
-                self.calendarTopLabel.text = "Today"
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.calendarTopLabel.text = "Tomorrow"
+                if self.calendarController.areEventsFromToday() {
+                    self.calendarTopLabel.text = "Today"
+                } else {
+                    self.calendarTopLabel.text = "Tomorrow"
+                }
+                self.calendarTableView.reloadData()
             }
         }
-        calendarTableView.reloadData()
     }
     
     @objc func updateReminderEvents() {
-        reminderController.updateReminderEvents()
-        reminderTableView.reloadData()
+        let group = DispatchGroup()
+        group.enter()
+        reminderController.updateReminderEvents(group: group)
+        group.notify(queue: .global()) {
+            DispatchQueue.main.async {
+                self.reminderTableView.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

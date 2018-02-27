@@ -21,7 +21,7 @@ class CalendarController {
         return eventList[index]
     }
     
-    func updateCalendarEvents() {
+    func updateCalendarEvents(group: DispatchGroup) {
         eventList.removeAll()
         let eventStore = EKEventStore()
         let calendars = eventStore.calendars(for: .event)
@@ -53,6 +53,7 @@ class CalendarController {
         }
         
         eventList.sort()
+        group.leave()
     }
     
     func areEventsFromToday() -> Bool {

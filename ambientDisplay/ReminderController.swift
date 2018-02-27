@@ -24,7 +24,7 @@ class ReminderController {
         return eventList[index]
     }
     
-    func updateReminderEvents() {
+    func updateReminderEvents(group: DispatchGroup) {
         if reminder == nil {
             let reminders = eventStore.calendars(for: .reminder)
             for r in reminders {
@@ -42,7 +42,7 @@ class ReminderController {
                     for item in reminderItems! {
                         self.eventList.append(item.title)
                     }
-                    print(self.eventList.count)
+                    group.leave()
                 })
             }
             
