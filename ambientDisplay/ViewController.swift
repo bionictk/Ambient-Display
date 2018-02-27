@@ -67,16 +67,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     @objc func setErrorMessage(notification: NSNotification) {
-        errorLabel.text = errorLabel.text! + "/" + (notification.object as! String)
+        DispatchQueue.main.async {
+            self.errorLabel.text = self.errorLabel.text! + "/" + (notification.object as! String)
+        }
     }
 
     @objc func clearErrorMessage() {
-        errorLabel.text = ""
+        DispatchQueue.main.async {
+            self.errorLabel.text = ""
+        }
     }
 
     @objc func updateTimeLabel() {
-        dateLabel.text = timeController.getCurrentDate()
-        timeLabel.text = timeController.getCurrentTime()
+        DispatchQueue.main.async {
+            self.dateLabel.text = self.timeController.getCurrentDate()
+            self.timeLabel.text = self.timeController.getCurrentTime()
+        }
     }
     
     @objc func updateCurrentWeather() {
@@ -91,9 +97,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @objc func updateCalendarEvents() {
         calendarController.updateCalendarEvents()
         if calendarController.areEventsFromToday() {
-            calendarTopLabel.text = "Today"
+            DispatchQueue.main.async {
+                self.calendarTopLabel.text = "Today"
+            }
         } else {
-            calendarTopLabel.text = "Tomorrow"
+            DispatchQueue.main.async {
+                self.calendarTopLabel.text = "Tomorrow"
+            }
         }
         calendarTableView.reloadData()
     }
