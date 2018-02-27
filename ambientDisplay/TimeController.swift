@@ -9,14 +9,21 @@
 import Foundation
 
 class TimeController {
-    var formatter = DateFormatter()
+    var timeFormatter = DateFormatter()
+    var dateFormatter = DateFormatter()
+    var date = Date()
     
     init() {
-        formatter.timeStyle = DateFormatter.Style.short
+        timeFormatter.timeStyle = DateFormatter.Style.short
+        dateFormatter.dateFormat = "E d"
     }
     
     func getCurrentTime() -> String {
-        let date = Date()
-        return formatter.string(from: date as Date)
+        date = Date()
+        return timeFormatter.string(from: date as Date)
+    }
+    
+    func getCurrentDate() -> String {
+        return dateFormatter.string(from: date as Date)
     }
 }

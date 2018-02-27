@@ -15,6 +15,7 @@ extension Notification.Name {
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     
@@ -68,6 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     @objc func updateTimeLabel() {
+        dateLabel.text = timeController.getCurrentDate()
         timeLabel.text = timeController.getCurrentTime()
     }
     
