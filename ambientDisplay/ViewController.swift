@@ -28,10 +28,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var timeController: TimeController = TimeController()
     var weatherController: WeatherController = WeatherController()
     var calendarController: CalendarController = CalendarController()
+    var reminderController: ReminderController = ReminderController()
     
     var clockUpdateTimer: Timer?
     var weatherUpdateTimer: Timer?
     var calendarUpdateTimer: Timer?
+    var reminderUpdateTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +56,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Timer loop for calendar events
         calendarUpdateTimer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(updateCalendarEvents), userInfo: nil, repeats: true)
      
+        // Timer loop for reminder events
+        reminderUpdateTimer = Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(updateReminderEvents), userInfo: nil, repeats: true)
+        
         // Init views
         updateTimeLabel()
         updateCurrentWeather()
         updateCalendarEvents()
+        updateReminderEvents()
     }
 
     @objc func setErrorMessage(notification: NSNotification) {
@@ -92,6 +98,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         calendarTableView.reloadData()
     }
     
+    @objc func updateReminderEvents() {
+        reminderController.updateReminderEvents()
+//        reminderTableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return calendarController.getTableSize()
     }
@@ -110,6 +121,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Request access to calendar
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.event, completion: {
+            (accessGranted: Bool, error: Error?) in
+        })
+        eventStore.requestAccess(to: EKEntityType.reminder, completion: {
             (accessGranted: Bool, error: Error?) in
         })
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7469816E2045282700B9A8B5 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7469816D2045282700B9A8B5 /* ReminderController.swift */; };
 		746CAE2B2016781700C39C06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE2A2016781700C39C06 /* AppDelegate.swift */; };
 		746CAE2D2016781700C39C06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE2C2016781700C39C06 /* ViewController.swift */; };
 		746CAE302016781700C39C06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746CAE2E2016781700C39C06 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7469816D2045282700B9A8B5 /* ReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
 		746CAE272016781700C39C06 /* ambientDisplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ambientDisplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		746CAE2A2016781700C39C06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		746CAE2C2016781700C39C06 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				746CAE4A20179F0200C39C06 /* TimeController.swift */,
 				746CAE4C2017E5CD00C39C06 /* WeatherController.swift */,
 				746CAE4E20182C3B00C39C06 /* CalendarController.swift */,
+				7469816D2045282700B9A8B5 /* ReminderController.swift */,
 			);
 			path = ambientDisplay;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				746CAE4F20182C3B00C39C06 /* CalendarController.swift in Sources */,
 				746CAE2B2016781700C39C06 /* AppDelegate.swift in Sources */,
 				746CAE4B20179F0200C39C06 /* TimeController.swift in Sources */,
+				7469816E2045282700B9A8B5 /* ReminderController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
