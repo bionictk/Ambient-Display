@@ -14,14 +14,15 @@ class ReminderController {
     let eventStore = EKEventStore()
     var reminder: EKCalendar?
     var predicate: NSPredicate?
-    var eventList: [String] = []
+    var eventList: [EKReminder] = []
+    var undoList: [String] = []
     
     func getTableSize() -> Int {
         return eventList.count
     }
     
     func getTitle(index: Int) -> String {
-        return eventList[index]
+        return eventList[index].title
     }
     
     func updateReminderEvents(group: DispatchGroup) {
@@ -40,7 +41,7 @@ class ReminderController {
                 self.eventStore.fetchReminders(matching: self.predicate!, completion: {reminderItems in
                     self.eventList.removeAll()
                     for item in reminderItems! {
-                        self.eventList.append(item.title)
+                        self.eventList.append(item)
                     }
                     group.leave()
                 })
@@ -54,5 +55,24 @@ class ReminderController {
         }
         
     }
+    
+    func setComplete(index: Int) {
+        eventList[index].isCompleted = true
+        undoList.append(eventList[index].title)
+        try? eventStore.save(eventList[index], commit: true)
+    }
+    
+    func isUndoListEmpty() -> Bool {
+        return undoList.isEmpty
+    }
 
+    @objc func undoItem() {
+        if !undoList.isEmpty {
+            let title = undoList.popLast()
+            let newReminder = EKReminder(eventStore: eventStore)
+            newReminder.title = title
+            newReminder.calendar = reminder
+            try? eventStore.save(newReminder, commit: true)
+        }
+    }
 }

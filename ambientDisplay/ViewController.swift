@@ -26,6 +26,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var calendarTableView: UITableView!
     @IBOutlet weak var reminderTableView: UITableView!
     
+    @IBOutlet weak var reminderUndoButton: UIButton!
+    
     var timeController: TimeController = TimeController()
     var weatherController: WeatherController = WeatherController()
     var calendarController: CalendarController = CalendarController()
@@ -39,6 +41,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        reminderUndoButton.addTarget(reminderController, action: #selector(ReminderController.undoItem), for: .touchUpInside)
+        
         // Listener for errors
         // Usage: NotificationCenter.default.post(name: .errorChannel, object: "Error message.")
         NotificationCenter.default.addObserver(self, selector: #selector(setErrorMessage(notification:)), name: .errorChannel, object: nil)
@@ -55,10 +59,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 935, target: self, selector: #selector(updateCurrentWeather), userInfo: nil, repeats: true)
         
         // Timer loop for calendar events
-        calendarUpdateTimer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(updateCalendarEvents), userInfo: nil, repeats: true)
+        calendarUpdateTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateCalendarEvents), userInfo: nil, repeats: true)
      
         // Timer loop for reminder events
-        reminderUpdateTimer = Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(updateReminderEvents), userInfo: nil, repeats: true)
+        reminderUpdateTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(updateReminderEvents), userInfo: nil, repeats: true)
         
         // Init views
         updateTimeLabel()
@@ -118,6 +122,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         group.notify(queue: .global()) {
             DispatchQueue.main.async {
                 self.reminderTableView.reloadData()
+                self.reminderUndoButton.isHidden = self.reminderController.isUndoListEmpty()
             }
         }
     }
@@ -159,6 +164,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.textLabel?.textColor = .white
             cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == calendarTableView {
+        } else {
+            if (indexPath.row == 0 ) {reminderController.undoItem()}
+            reminderController.setComplete(index: indexPath.row)
+            updateReminderEvents()
         }
     }
     

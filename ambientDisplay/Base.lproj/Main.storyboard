@@ -128,6 +128,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0w-ck-BmH">
+                                <rect key="frame" x="965" y="245" width="39" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                </accessibility>
+                                <state key="normal" title="Button" image="undo"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -140,6 +148,7 @@
                         <outlet property="dateLabel" destination="IDR-ER-akF" id="LRJ-93-nAI"/>
                         <outlet property="errorLabel" destination="txJ-to-Rc2" id="W51-T3-Oh0"/>
                         <outlet property="reminderTableView" destination="QFq-9V-YMd" id="HgD-QP-0eM"/>
+                        <outlet property="reminderUndoButton" destination="b0w-ck-BmH" id="7g7-oT-5bi"/>
                         <outlet property="timeLabel" destination="OVi-wD-oRe" id="you-B2-0LR"/>
                     </connections>
                 </viewController>
@@ -148,4 +157,7 @@
             <point key="canvasLocation" x="-78.515625" y="133.59375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="undo" width="256" height="256"/>
+    </resources>
 </document>
