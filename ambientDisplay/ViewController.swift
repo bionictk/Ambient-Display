@@ -24,6 +24,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var calendarTopLabel: UILabel!
     @IBOutlet weak var calendarTableView: UITableView!
+    @IBOutlet weak var reminderTableView: UITableView!
     
     var timeController: TimeController = TimeController()
     var weatherController: WeatherController = WeatherController()
@@ -110,21 +111,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @objc func updateReminderEvents() {
         reminderController.updateReminderEvents()
-//        reminderTableView.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return calendarController.getTableSize()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarCell")!
-        
-        cell.textLabel?.text = calendarController.getTitle(index: indexPath.row)
-//        cell.detailTextLabel?.text = "details!!"
-        cell.textLabel?.textColor = .white
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
-        return cell
+        reminderTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -136,6 +123,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         eventStore.requestAccess(to: EKEntityType.reminder, completion: {
             (accessGranted: Bool, error: Error?) in
         })
+    }
+    
+    // table view controller functions
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == calendarTableView {
+            return calendarController.getTableSize()
+        } else {
+            return reminderController.getTableSize()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == calendarTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarCell")!
+            
+            cell.textLabel?.text = calendarController.getTitle(index: indexPath.row)
+            //        cell.detailTextLabel?.text = "details!!"
+            cell.textLabel?.textColor = .white
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell")!
+            
+            cell.textLabel?.text = reminderController.getTitle(index: indexPath.row)
+            //        cell.detailTextLabel?.text = "details!!"
+            cell.textLabel?.textColor = .white
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+            return cell
+        }
     }
     
 }

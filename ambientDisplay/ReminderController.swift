@@ -25,8 +25,6 @@ class ReminderController {
     }
     
     func updateReminderEvents() {
-        eventList.removeAll()
-        
         if reminder == nil {
             let reminders = eventStore.calendars(for: .reminder)
             for r in reminders {
@@ -38,14 +36,15 @@ class ReminderController {
         }
         
         if reminder != nil {
-            
-            eventStore.fetchReminders(matching: predicate!, completion: {reminderItems in
-                for item in reminderItems! {
-                    print(item.title)
-                    
-                }
-                
-            })
+            DispatchQueue.main.async {
+                self.eventStore.fetchReminders(matching: self.predicate!, completion: {reminderItems in
+                    self.eventList.removeAll()
+                    for item in reminderItems! {
+                        self.eventList.append(item.title)
+                    }
+                    print(self.eventList.count)
+                })
+            }
             
 //            let formatter = DateFormatter()
 //            formatter.dateFormat = "HH:mm"
@@ -53,7 +52,7 @@ class ReminderController {
 //            eventList.append(formattedString + "\t  " + event.title)
             
         }
-
+        
     }
 
 }
