@@ -9,7 +9,7 @@
 import EventKit
 
 class ReminderController {
-    let reminderTitle: String = "todo"
+    let reminderTitle: String = "To Do"
     
     let eventStore = EKEventStore()
     var reminder: EKCalendar?
