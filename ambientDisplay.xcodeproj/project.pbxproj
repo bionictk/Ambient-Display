@@ -17,6 +17,7 @@
 		746CAE4B20179F0200C39C06 /* TimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE4A20179F0200C39C06 /* TimeController.swift */; };
 		746CAE4D2017E5CD00C39C06 /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE4C2017E5CD00C39C06 /* WeatherController.swift */; };
 		746CAE4F20182C3B00C39C06 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CAE4E20182C3B00C39C06 /* CalendarController.swift */; };
+		746E625120A9FF1800F6DEA4 /* TimeoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E625020A9FF1800F6DEA4 /* TimeoutController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		746CAE4A20179F0200C39C06 /* TimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeController.swift; sourceTree = "<group>"; };
 		746CAE4C2017E5CD00C39C06 /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 		746CAE4E20182C3B00C39C06 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
+		746E625020A9FF1800F6DEA4 /* TimeoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeoutController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				746CAE4C2017E5CD00C39C06 /* WeatherController.swift */,
 				746CAE4E20182C3B00C39C06 /* CalendarController.swift */,
 				7469816D2045282700B9A8B5 /* ReminderController.swift */,
+				746E625020A9FF1800F6DEA4 /* TimeoutController.swift */,
 			);
 			path = ambientDisplay;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				746CAE4D2017E5CD00C39C06 /* WeatherController.swift in Sources */,
 				746CAE2D2016781700C39C06 /* ViewController.swift in Sources */,
 				746CAE4F20182C3B00C39C06 /* CalendarController.swift in Sources */,
+				746E625120A9FF1800F6DEA4 /* TimeoutController.swift in Sources */,
 				746CAE2B2016781700C39C06 /* AppDelegate.swift in Sources */,
 				746CAE4B20179F0200C39C06 /* TimeController.swift in Sources */,
 				7469816E2045282700B9A8B5 /* ReminderController.swift in Sources */,

@@ -28,20 +28,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var reminderUndoButton: UIButton!
     
+    @IBOutlet weak var washerButton: UIButton!
+    @IBOutlet weak var washerLabel: UILabel!
+    @IBOutlet weak var dryerButton: UIButton!
+    @IBOutlet weak var dryerLabel: UILabel!
+    
     var timeController: TimeController = TimeController()
     var weatherController: WeatherController = WeatherController()
     var calendarController: CalendarController = CalendarController()
     var reminderController: ReminderController = ReminderController()
+    var washerController: TimeoutController = TimeoutController(timeout: 60 * 60)
+    var dryerController: TimeoutController = TimeoutController(timeout: 90 * 60)
     
     var clockUpdateTimer: Timer?
     var weatherUpdateTimer: Timer?
     var calendarUpdateTimer: Timer?
     var reminderUpdateTimer: Timer?
+    var washerUpdateTimer: Timer?
+    var dryerUpdateTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Add button behaviors
         reminderUndoButton.addTarget(reminderController, action: #selector(ReminderController.undoItem), for: .touchUpInside)
+        washerButton.addTarget(self, action: #selector(onWasherClick), for: .touchUpInside)
+        washerButton.addTarget(self, action: #selector(onWasherDoubleClick), for: .touchDownRepeat)
+        dryerButton.addTarget(self, action: #selector(onDryerClick), for: .touchUpInside)
+        dryerButton.addTarget(self, action: #selector(onDryerDoubleClick), for: .touchDownRepeat)
+        
         
         // Listener for errors
         // Usage: NotificationCenter.default.post(name: .errorChannel, object: "Error message.")
@@ -125,6 +140,81 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.reminderUndoButton.isHidden = self.reminderController.isUndoListEmpty()
             }
         }
+    }
+    
+    func updateTimeoutButton(controller: TimeoutController, button: UIButton, timer: Timer, label: UILabel) {
+        let state = controller.getCurrentState()
+        switch state {
+        case .idle:
+            button.alpha = 0.15
+            button.backgroundColor = nil
+            timer.invalidate()
+            break
+        case .counting:
+            button.alpha = 1.0
+            button.backgroundColor = nil
+            break
+        case .paused:
+            button.alpha = 0.3
+            button.backgroundColor = UIColor.red
+            timer.invalidate()
+            break
+        case .finished:
+            button.alpha = 1
+            if (button.backgroundColor == nil) {
+                button.backgroundColor = UIColor.red
+            } else {
+                button.backgroundColor = nil
+            }
+            break
+        }
+        
+        let remainingTime = controller.getCurrentTime()
+        if (remainingTime > 59) {
+            label.text = String(remainingTime / 60) + "m"
+        } else if (remainingTime > 0) {
+            label.text = String(remainingTime) + "s"
+        } else {
+            label.text = ""
+        }
+    }
+    
+    @objc func updateWasherButton() {
+        updateTimeoutButton(controller: washerController, button: washerButton, timer: washerUpdateTimer!, label: washerLabel)
+    }
+    
+    @objc func updateDryerButton() {
+        updateTimeoutButton(controller: dryerController, button: dryerButton, timer: dryerUpdateTimer!, label: dryerLabel)
+    }
+    
+    var invalidateWasherButton: Bool = false // to prevent restarting after double click
+    @objc func onWasherClick() {
+        if (!invalidateWasherButton && washerController.click()) {
+            washerUpdateTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateWasherButton), userInfo: nil, repeats: true)
+        }
+        invalidateWasherButton = false
+        updateWasherButton()
+    }
+    
+    @objc func onWasherDoubleClick() {
+        washerController.resetTimer()
+        updateWasherButton()
+        invalidateWasherButton = true
+    }
+    
+    var invalidateDryerButton: Bool = false // to prevent restarting after double click
+    @objc func onDryerClick() {
+        if (!invalidateDryerButton && dryerController.click()) {
+            dryerUpdateTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateDryerButton), userInfo: nil, repeats: true)
+        }
+        invalidateDryerButton = false
+        updateDryerButton()
+    }
+    
+    @objc func onDryerDoubleClick() {
+        dryerController.resetTimer()
+        updateDryerButton()
+        invalidateDryerButton = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

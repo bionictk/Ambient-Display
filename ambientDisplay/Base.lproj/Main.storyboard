@@ -146,6 +146,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="dryer"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGJ-bM-Wzh" userLabel="Washer Timer">
+                                <rect key="frame" x="835" y="117" width="53" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KjP-5e-l8d" userLabel="Dryer Timer">
+                                <rect key="frame" x="935" y="117" width="53" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -156,10 +170,14 @@
                         <outlet property="currentTempLabel" destination="Vfz-Sr-sKP" id="Wsx-zn-fcX"/>
                         <outlet property="currentWeatherIcon" destination="gQA-8U-sHj" id="hWr-vK-pqt"/>
                         <outlet property="dateLabel" destination="IDR-ER-akF" id="LRJ-93-nAI"/>
+                        <outlet property="dryerButton" destination="yTi-l1-aK2" id="skP-36-uss"/>
+                        <outlet property="dryerLabel" destination="KjP-5e-l8d" id="WWz-6a-ROk"/>
                         <outlet property="errorLabel" destination="txJ-to-Rc2" id="W51-T3-Oh0"/>
                         <outlet property="reminderTableView" destination="QFq-9V-YMd" id="HgD-QP-0eM"/>
                         <outlet property="reminderUndoButton" destination="b0w-ck-BmH" id="7g7-oT-5bi"/>
                         <outlet property="timeLabel" destination="OVi-wD-oRe" id="you-B2-0LR"/>
+                        <outlet property="washerButton" destination="7qM-G4-dhZ" id="50V-ax-QbH"/>
+                        <outlet property="washerLabel" destination="aGJ-bM-Wzh" id="EXF-0M-y26"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
